@@ -31,12 +31,11 @@ class RegisterUserRequest extends FormRequest
             'kecamatan' => 'required|string|max:30',
             'kota' => 'required|string|max:30',
             'provinsi' => 'required|string|max:30',
-            'rec1' => 'required|string|max:30',
-            'rec2' => 'required|string|max:30',
-            'rec3' => 'required|string|max:30',
-            'rec4' => 'required|string|max:30',
-            'rec5' => 'required|integer|max:30',
-
+            'animal_type' => 'required|string|max:30',
+            'breed' => 'required|string|max:30',
+            'animal_gender' => 'required|string|max:30',
+            'age_group' => 'required|string|max:30',
+            'color_count' => 'required|integer|max:30',
         ];
     }
 }

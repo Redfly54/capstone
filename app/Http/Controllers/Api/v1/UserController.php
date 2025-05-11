@@ -26,11 +26,12 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function store(RegisterUserRequest $request)
+    public function register(RegisterUserRequest $request)
     {
         $validatedData = $request->validated();
         $validatedData['user_id'] = strtoupper(Str::random(2)) . str_pad(fake()->randomNumber(3, false), 3, '0', STR_PAD_LEFT);
         $validatedData['password'] = bcrypt($validatedData['password']);
+        $validatedData['description'] = 'Hello, I love animals and I am looking for a new friend that needs a forever home.';
 
         $user = User::create($validatedData);
 

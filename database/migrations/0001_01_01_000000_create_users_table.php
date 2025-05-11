@@ -23,11 +23,12 @@ return new class extends Migration
             $table->string('kecamatan');
             $table->string('kota');
             $table->string('provinsi');
-            $table->string('rec1')->nullable();
-            $table->string('rec2')->nullable();
-            $table->string('rec3')->nullable();
-            $table->string('rec4')->nullable();
-            $table->string('rec5')->nullable();
+            $table->string('animal_type')->nullable();
+            $table->string('breed')->nullable();
+            $table->string('animal_gender')->nullable();
+            $table->string('age_group')->nullable();
+            $table->string('color_count')->nullable();
+            $table->string('description')->nullable();
             $table->boolean('terms')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();
