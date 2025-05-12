@@ -26,16 +26,39 @@ class UserController extends Controller
         return response()->json($user);
     }
 
-    public function register(RegisterUserRequest $request)
+    public function register(Request $request)
     {
-        $validatedData = $request->validated();
-        $validatedData['user_id'] = strtoupper(Str::random(2)) . str_pad(fake()->randomNumber(3, false), 3, '0', STR_PAD_LEFT);
-        $validatedData['password'] = bcrypt($validatedData['password']);
-        $validatedData['description'] = 'Hello, I love animals and I am looking for a new friend that needs a forever home.';
+        try {
+            $validatedData = $request->validate([
+            'username' => 'required|string|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6', 
+            'phone' => 'required|string|max:13|min:10',
+            'alamat' => 'required|string|max:255',
+            'kelurahan' => 'required|string|max:255',
+            'kecamatan' => 'required|string|max:30',
+            'kota' => 'required|string|max:30',
+            'provinsi' => 'required|string|max:30',
+            'animal_type' => 'required|string|max:30',
+            'breed' => 'required|string|max:30',
+            'animal_gender' => 'required|string|max:30',
+            'age_group' => 'required|string|max:30',
+            'color_count' => 'required|integer|max:30',
+        ]);
 
-        $user = User::create($validatedData);
+            $validatedData['user_id'] = strtoupper(Str::random(2)) . str_pad(fake()->randomNumber(3, false), 3, '0', STR_PAD_LEFT);
+            $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['description'] = 'Hello, I love animals and I am looking for a new friend that needs a forever home.';
 
-        return response()->json($user, 201);
+            $user = User::create($validatedData);
+
+            return response()->json($user, 201);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage()
+            ], 422);
+        }
     }
 
     public function login(Request $request)
