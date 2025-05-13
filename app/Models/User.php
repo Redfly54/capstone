@@ -29,15 +29,15 @@ class User extends Authenticatable
         'kecamatan',
         'kota',
         'provinsi',
-        'animal_type',
-        'breed',
-        'animal_gender',
-        'age_group',
-        'color_count',
         'description',
         'terms',
         'is_admin',
     ];
+
+    public function reference()
+    {
+        return $this->hasOne(Reference::class, 'user_id', 'user_id');
+    }
 
     /**
      * The attributes that should be hidden for serialization.

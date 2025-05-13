@@ -13,7 +13,7 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
+        $users = User::with('reference')->get();
         return response()->json($users);
     }
 
@@ -52,12 +52,24 @@ class UserController extends Controller
 
             $user = User::create($validatedData);
 
-            return response()->json($user, 201);
+            $user->reference()->create([
+            'animal_type' => $validatedData['animal_type'],
+            'breed' => $validatedData['breed'],
+            'animal_gender' => $validatedData['animal_gender'],
+            'age_group' => $validatedData['age_group'],
+            'color_count' => $validatedData['color_count'],
+        ]);
+
+        // Return the user with the reference data
+        return response()->json($user->load('reference'), 201);
 
         } catch (\Exception $e) {
+            // Log the error and return a response
+            \Log::error('Registration Error: ' . $e->getMessage());
             return response()->json([
-                'message' => $e->getMessage()
-            ], 422);
+                'message' => 'An error occurred during registration.',
+                'error' => $e->getMessage(),
+            ], 500);
         }
     }
 

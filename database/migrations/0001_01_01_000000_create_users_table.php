@@ -23,11 +23,6 @@ return new class extends Migration
             $table->string('kecamatan');
             $table->string('kota');
             $table->string('provinsi');
-            $table->string('animal_type')->nullable();
-            $table->string('breed')->nullable();
-            $table->string('animal_gender')->nullable();
-            $table->string('age_group')->nullable();
-            $table->string('color_count')->nullable();
             $table->string('description')->nullable();
             $table->boolean('terms')->default(false);
             $table->boolean('is_admin')->default(false);
