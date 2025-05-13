@@ -5,9 +5,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\v1\UserController;
 
 Route::group(['prefix' => 'v1'], function () {
-    Route::apiResource('users', UserController::class);
+
+    Route::middleware('auth:sanctum')->get('/users/profile', [UserController::class, 'profile']);
+    Route::middleware('auth:sanctum')->put('/users/changeprof', [UserController::class, 'updateDescription']);
     Route::post('users/register', [UserController::class, 'register']);
     Route::post('users/login', [UserController::class, 'login']);
+    Route::apiResource('users', UserController::class);
+
 
 });
 

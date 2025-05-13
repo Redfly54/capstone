@@ -97,6 +97,36 @@ class UserController extends Controller
             'token' => $token,
         ]);
     }
+
+    public function profile()
+    {
+        $user = auth()->user(); 
+
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+
+         return response()->json($user);
+    }
+
+    public function updateDescription(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+
+        $request->validate([
+            'description' => 'required|string|max:255',
+        ]);
+
+        $user->description = $request->description;
+        $user->save();
+
+        return response()->json(['message' => 'Description updated successfully', 'user' => $user]);
+    }
+
     // public function update(Request $request, $id)
     // {
     //     $user = User::find($id);
