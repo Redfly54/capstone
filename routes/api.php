@@ -8,6 +8,7 @@ Route::group(['prefix' => 'v1'], function () {
 
     Route::middleware('auth:sanctum')->get('/users/profile', [UserController::class, 'profile']);
     Route::middleware('auth:sanctum')->put('/users/changeprof', [UserController::class, 'updateDescription']);
+    Route::middleware('auth:sanctum')->post('users/update-picture', [UserController::class, 'updatePicture']);
     Route::post('users/register', [UserController::class, 'register']);
     Route::post('users/login', [UserController::class, 'login']);
     Route::apiResource('users', UserController::class);

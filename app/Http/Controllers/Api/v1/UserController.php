@@ -48,6 +48,7 @@ class UserController extends Controller
 
             $validatedData['user_id'] = strtoupper(Str::random(2)) . str_pad(fake()->randomNumber(3, false), 3, '0', STR_PAD_LEFT);
             $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['picture'] = 'images/default.png';
             $validatedData['description'] = 'Hello, I love animals and I am looking for a new friend that needs a forever home.';
 
             $user = User::create($validatedData);
@@ -127,13 +128,27 @@ class UserController extends Controller
         return response()->json(['message' => 'Description updated successfully', 'user' => $user]);
     }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $user = User::find($id);
-    //     if (!$user) {
-    //         return response()->json(['message' => 'User not found'], 404);
-    //     }
-    //     $user->update($request->all());
-    //     return response()->json($user);
-    // }
+    public function updatePicture(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+
+        $request->validate([
+            'picture' => 'required|image|mimes:jpeg,png,jpg,gif|max:40960', 
+        ]);
+
+        $path = $request->file('picture')->store('images', 'public');
+
+        $user->picture = 'storage/' . $path;
+        $user->save();
+
+        return response()->json([
+            'message' => 'Profile picture updated successfully',
+            'user' => $user
+        ]);
+    }
+
 }
