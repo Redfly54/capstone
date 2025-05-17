@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('kota');
             $table->string('provinsi');
             $table->string('description')->nullable();
+            $table->string('picture')->nullable();
             $table->boolean('terms')->default(false);
             $table->boolean('is_admin')->default(false);
             $table->timestamp('email_verified_at')->nullable();

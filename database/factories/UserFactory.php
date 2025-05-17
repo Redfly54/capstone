@@ -42,6 +42,7 @@ class UserFactory extends Factory
             'kota' => 'Jakarta',
             'provinsi' => 'Jawa Barat',
             'description' => 'Hello, I love animals and I am looking for a new friend that needs a forever home.',
+            'picture' => 'images/default.png',
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
     ];
