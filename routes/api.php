@@ -20,3 +20,8 @@ Route::get('/test', function () {
 });
 
 Route::post('adopsi-pets', [AdopsiPetController::class, 'store']);
+Route::get('/pets', [AdopsiPetController::class, 'getAllPets']);
+Route::get('/pet/details', [AdopsiPetController::class, 'getPetDetails']);
+Route::post('/pet/delete', [AdopsiPetController::class, 'deletePet']);
+Route::put('/pet/{id}', [AdopsiPetController::class, 'updatePet']);
+

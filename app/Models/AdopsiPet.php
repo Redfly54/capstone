@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class AdopsiPet extends Model
 {
-     use HasFactory;
+     use HasFactory,SoftDeletes;
 
     protected $table = 'adopsi_pets';
 
@@ -29,6 +30,8 @@ class AdopsiPet extends Model
         'pictures' => 'array',
         'weight' => 'decimal:2',
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function category()
     {
