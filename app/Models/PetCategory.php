@@ -13,8 +13,8 @@ class PetCategory extends Model
         'name',
     ];
 
-    public function adopsiPets()
+    public function Post()
     {
-        return $this->hasMany(AdopsiPet::class, 'pet_category_id');
+        return $this->hasMany(Post::class, 'pet_category_id');
     }
 }

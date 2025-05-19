@@ -14,7 +14,7 @@ class Age extends Model
         'description',
     ];
 
-    public function adopsiPets()
+    public function Post()
     {
         return $this->hasMany(AdopsiPet::class);
     }

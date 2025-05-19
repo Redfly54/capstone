@@ -13,8 +13,8 @@ class Breed extends Model
         'name',
     ];
 
-    public function adopsiPets()
+    public function Posts()
     {
-        return $this->hasMany(AdopsiPet::class);
+        return $this->hasMany(Post::class);
     }
 }

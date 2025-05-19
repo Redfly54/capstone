@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('adopsi_pets', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
              $table->id();
             $table->string('pet_name');
             
@@ -28,7 +28,7 @@ return new class extends Migration
                   ->onDelete('cascade');
             
             // warna; jika butuh lookup table warna, bisa ubah menjadi unsignedBigInteger + fk
-            $table->string('color');
+            $table->string('color_count');
             
             // relasi ke ages
             $table->unsignedBigInteger('age_id');
@@ -45,17 +45,18 @@ return new class extends Migration
             $table->json('pictures');          // array nama file gambar
             
             // relasi ke users
-            $table->unsignedBigInteger('user_id');
+            $table->string('user_id');
             $table->foreign('user_id')
-                  ->references('id')->on('users')
+                  ->references('user_id')->on('users')
                   ->onDelete('cascade');
-
-            // pengganti_id (misal: admin atau foster pengganti)
-            $table->unsignedBigInteger('pengganti_id')->nullable();
-            $table->foreign('pengganti_id')
-                  ->references('id')->on('users')
-                  ->onDelete('set null');
-
+            
+            $table->string('email');
+            $table->string('phone');
+            $table->string('address');
+            $table->string('kelurahan');
+            $table->string('kecamatan');
+            $table->string('kota');
+            $table->string('provinsi');
             $table->timestamps();
         });
     }
@@ -65,6 +66,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('adopsi_pets');
+        Schema::dropIfExists('posts');
     }
 };
