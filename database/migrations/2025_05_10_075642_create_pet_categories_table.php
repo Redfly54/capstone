@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pet_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('icon')->nullable();
             $table->string('name');           // nama category
             $table->timestamps();
         });

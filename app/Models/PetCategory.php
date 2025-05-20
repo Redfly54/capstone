@@ -10,6 +10,7 @@ class PetCategory extends Model
     use HasFactory;
 
     protected $fillable = [
+        'icon',
         'name',
     ];
 

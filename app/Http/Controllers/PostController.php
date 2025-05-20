@@ -82,11 +82,17 @@ class PostController extends Controller
         return response()->json(['data' => $pet], 201);
     }
 
-    public function getAllPets() {
+    public function getAllPets(Request $request) {
         // Fetch all pets, including their related data if necessary (e.g., user, category, breed, etc.)
-        $pets = Post::with(['category', 'breed', 'age', 'user']) // Add any related models
-                        ->whereNull('deleted_at') 
-                        ->get();
+        $query = Post::with(['category', 'breed', 'age', 'user'])
+                 ->whereNull('deleted_at');
+
+        // If user_id is provided in the query, filter by it
+        if ($request->has('user_id')) {
+            $query->where('user_id', $request->query('user_id'));
+        }
+
+        $pets = $query->get();
 
         return response()->json(['data' => $pets], 200);
     }
