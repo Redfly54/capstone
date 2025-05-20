@@ -142,7 +142,7 @@ class UserController extends Controller
 
         $path = $request->file('picture')->store('images', 'public');
 
-        $user->picture = 'storage/' . $path;
+        $user->picture = $path;
         $user->save();
 
         return response()->json([

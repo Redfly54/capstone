@@ -66,10 +66,10 @@ class PostController extends Controller
                     $timestamp = now()->timestamp;
                     $filename = $pet->id . '_' . $timestamp
                                 . '_' . ($idx+1) . '.' . $file->extension();
-                    // store in storage/app/public
-                    // $file->storeAs('public', $filename);
-                    $file->storeAs('', $filename, 'public');
-                    $storedNames[] = $filename;
+                    // store in storage/app/public/images
+                    // $file->storeAs('public/images', $filename);
+                    $file->storeAs('images', $filename, 'public');
+                    $storedNames[] = 'images/' . $filename;
                 }
                 // update pet pictures
                 $pet->pictures = $storedNames;
