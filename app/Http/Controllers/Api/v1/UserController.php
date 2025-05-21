@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
-
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
@@ -66,7 +66,7 @@ class UserController extends Controller
 
         } catch (\Exception $e) {
             // Log the error and return a response
-            \Log::error('Registration Error: ' . $e->getMessage());
+            Log::error('Registration Error: ' . $e->getMessage());
             return response()->json([
                 'message' => 'An error occurred during registration.',
                 'error' => $e->getMessage(),
