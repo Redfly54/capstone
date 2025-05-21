@@ -13,9 +13,14 @@ class PetCategorySeeder extends Seeder
      */
     public function run(): void
     {
-         $categories = ['cat', 'dog', 'rabbit'];
-        foreach ($categories as $name) {
-            PetCategory::create(['name' => $name]);
+        $categories = [
+        ['name' => 'cat', 'icon' => 'images/cat.png'],
+        ['name' => 'dog', 'icon' => 'images/dog.png'],
+        ['name' => 'rabbit', 'icon' => 'images/rabbit.png'],
+        ];
+
+        foreach ($categories as $category) {
+            PetCategory::create($category);
         }
-    }
+        }
 }

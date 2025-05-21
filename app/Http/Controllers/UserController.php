@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\v1;
+namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -142,7 +142,7 @@ class UserController extends Controller
 
         $path = $request->file('picture')->store('images', 'public');
 
-        $user->picture = 'storage/' . $path;
+        $user->picture = $path;
         $user->save();
 
         return response()->json([

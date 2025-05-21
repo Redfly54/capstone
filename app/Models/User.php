@@ -33,11 +33,17 @@ class User extends Authenticatable
         'picture',
         'terms',
         'is_admin',
+        'is_active',
     ];
 
     public function reference()
     {
         return $this->hasOne(Reference::class, 'user_id', 'user_id');
+    }
+
+    public function post()
+    {
+        return $this->hasMany(Post::class, 'user_id', 'user_id');
     }
 
     /**

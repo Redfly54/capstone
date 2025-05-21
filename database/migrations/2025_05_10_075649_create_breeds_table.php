@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('breeds', function (Blueprint $table) {
             $table->id();
-            $table->string('name');           // nama breed
+            $table->string('name');           
+            $table->foreignId('pet_category_id')->constrained('pet_categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
