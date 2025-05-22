@@ -18,11 +18,11 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('phone');
-            $table->string('alamat');
-            $table->string('kelurahan');
-            $table->string('kecamatan');
-            $table->string('kota');
-            $table->string('provinsi');
+            $table->string('alamat')->nullable();
+            $table->string('kelurahan')->nullable();
+            $table->string('kecamatan')->nullable();
+            $table->string('kota')->nullable();
+            $table->string('provinsi')->nullable();
             $table->string('description')->nullable();
             $table->string('picture')->nullable();
             $table->boolean('terms')->default(false);
