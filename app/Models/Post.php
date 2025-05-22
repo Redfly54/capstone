@@ -46,12 +46,12 @@ class Post extends Model
 
     public function breed()
     {
-        return $this->belongsTo(Breed::class);
+        return $this->belongsTo(Breed::class, 'breed_id', 'id');
     }
 
     public function age()
     {
-        return $this->belongsTo(Age::class);
+        return $this->belongsTo(Age::class, 'age_id', 'id');
     }
 
     public function user()
@@ -59,8 +59,4 @@ class Post extends Model
         return $this->belongsTo(User::class, 'user_id', 'user_id');
     }
 
-    // public function pengganti()
-    // {
-    //     return $this->belongsTo(User::class, 'pengganti_id');
-    // }
 }

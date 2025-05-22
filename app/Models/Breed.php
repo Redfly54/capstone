@@ -13,8 +13,13 @@ class Breed extends Model
         'name',
     ];
 
-    public function Posts()
+    public function posts()
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class, 'breed_id');
+    }
+
+    public function category()
+    {
+        return $this->belongsTo(PetCategory::class, 'pet_category_id');
     }
 }
