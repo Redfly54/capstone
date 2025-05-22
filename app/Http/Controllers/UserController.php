@@ -46,8 +46,7 @@ class UserController extends Controller
             'color_count' => 'required|integer|max:30',
         ]);
 
-            $validatedData['user_id'] = strtoupper(Str::random(2)) . str_pad(fake()->randomNumber(3, false), 3, '0', STR_PAD_LEFT);
-            $validatedData['password'] = bcrypt($validatedData['password']);
+            $validatedData['user_id'] = strtoupper(Str::random(2)) . str_pad(random_int(0, 999), 3, '0', STR_PAD_LEFT);            $validatedData['password'] = bcrypt($validatedData['password']);
             $validatedData['picture'] = 'images/default.png';
             $validatedData['description'] = 'Hello, I love animals and I am looking for a new friend that needs a forever home.';
 
