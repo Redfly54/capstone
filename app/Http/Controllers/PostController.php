@@ -102,7 +102,7 @@ class PostController extends Controller
             'id' => 'required|exists:adopsi_pets,id'
         ]);
 
-        $pet = AdopsiPet::with(['category', 'breed', 'age', 'user', 'pengganti'])
+        $pet = Post::with(['category', 'breed', 'age', 'user', 'pengganti'])
                         ->find($validated['id']);
 
         if (!$pet) {
@@ -121,7 +121,7 @@ class PostController extends Controller
         ]);
 
         // Find the pet by its ID
-        $pet = AdopsiPet::find($validated['id']);
+        $pet = Post::find($validated['id']);
 
         // Check if the pet exists
         if (!$pet) {

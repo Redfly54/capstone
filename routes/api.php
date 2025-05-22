@@ -21,10 +21,15 @@ Route::middleware('auth:sanctum')->put('/users/changeprof', [UserController::cla
 Route::middleware('auth:sanctum')->post('users/update-picture', [UserController::class, 'updatePicture']);
 Route::apiResource('users', UserController::class);
 
-
 // Data Routes
 Route::get('/pet-categories', [DataController::class, 'getPetCategories']);
+Route::post('/pet-categories', [DataController::class, 'addPetCategory']);
+Route::put('/pet-categories/{id}', [DataController::class, 'editPetCategory']);
+Route::delete('/pet-categories/{id}', [DataController::class, 'deletePetCategory']);
 Route::get('/breeds', [DataController::class, 'getBreeds']);
+Route::post('/breeds', [DataController::class, 'addBreed']);
+Route::put('/breeds/{id}', [DataController::class, 'editBreed']);
+Route::delete('/breeds/{id}', [DataController::class, 'deleteBreed']);
 Route::get('/ages', [DataController::class, 'getAges']);
 
 // Posts Routes

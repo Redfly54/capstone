@@ -35,15 +35,15 @@ class CustomFakerProvider extends Base
 
     public function tipeHewan()
     {
-        return static::randomElement(['dog', 'cat', 'rabbit']);
+        return static::randomElement(['1', '2', '3']);
     }
 
     public function jenisHewan(string $tipeHewan)
     {
         $options = [
-            'dog' => ['Bulldog', 'kampung', 'Retriever', 'beagle', 'German Shepherd', 'another'],
-            'cat' => ['Persia', 'angora', 'kampung', 'siam', 'Bengal', 'another'],
-            'rabbit' => ['lop', 'dwar', 'anggora', 'himalayan', 'havana'],
+            '2' => ['1', '2', '3', '4', '5'],
+            '1' => ['7', '8', '9', '10', '11'],
+            '3' => ['13', '14', '15', '16'],
         ];
 
         return static::randomElement($options[$tipeHewan] ?? []);
@@ -51,18 +51,14 @@ class CustomFakerProvider extends Base
 
     public function genderHewan()
     {
-        return static::randomElement(['jantan', 'betina']);
+        return static::randomElement(['male', 'female']);
     }
 
     public function kelompokUsia(string $tipeHewan)
     {
-        $options = [
-            'dog' => ['puppy', 'adult', 'senior'],
-            'cat' => ['kitten', 'adult', 'senior'],
-            'rabbit' => ['muda', 'adult', 'senior'],
-        ];
+        $options = ['1', '2', '3'];
 
-        return static::randomElement($options[$tipeHewan] ?? []);
+        return static::randomElement($options);
     }
 
     public function jumlahWarna()
