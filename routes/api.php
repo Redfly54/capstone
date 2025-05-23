@@ -35,7 +35,7 @@ Route::get('/ages', [DataController::class, 'getAges']);
 // Posts Routes
 Route::post('posts/create', [PostController::class, 'store']);
 Route::get('/pets', [PostController::class, 'getAllPets']);
-Route::get('/pet/details', [PostController::class, 'getPetDetails']);
-Route::post('/pet/delete', [PostController::class, 'deletePet']);
+Route::get('/pet/details/{id}', [PostController::class, 'getPetDetails']);
+Route::post('/pet/delete/{id}', [PostController::class, 'deletePet']);
 Route::post('/pet/{id}', [PostController::class, 'updatePet']);
 

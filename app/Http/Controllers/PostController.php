@@ -97,41 +97,28 @@ class PostController extends Controller
         return response()->json(['data' => $pets], 200);
     }
 
-    public function getPetDetails(Request $request){
-        $validated = $request->validate([
-            'id' => 'required|exists:adopsi_pets,id'
-        ]);
-
-        $pet = Post::with(['category', 'breed', 'age', 'user', 'pengganti'])
-                        ->find($validated['id']);
+    public function getPetDetails($id)
+    {
+        $pet = Post::with(['category', 'breed', 'age', 'user'])
+                    ->find($id);
 
         if (!$pet) {
             return response()->json(['message' => 'Pet not found'], 404);
         }
 
-        // Return the pet details as JSON response
         return response()->json(['data' => $pet], 200);
     }
 
-    public function deletePet(Request $request)
+    public function deletePet($id)
     {
-        // Validate that 'id' is provided in the request body
-        $validated = $request->validate([
-            'id' => 'required|exists:adopsi_pets,id' // Ensure the pet ID exists in the database
-        ]);
+        $pet = Post::find($id);
 
-        // Find the pet by its ID
-        $pet = Post::find($validated['id']);
-
-        // Check if the pet exists
         if (!$pet) {
             return response()->json(['message' => 'Pet not found'], 404);
         }
 
-        // Perform a soft delete
         $pet->delete();
 
-        // Return success response
         return response()->json(['message' => 'Pet soft deleted successfully'], 200);
     }
 
