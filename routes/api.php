@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\MLController;
 
 Route::get('/images/{filename}', function ($filename) {
     $path = storage_path('app/public/images/' . $filename);
@@ -20,6 +21,9 @@ Route::middleware('auth:sanctum')->get('/users/profile', [UserController::class,
 Route::middleware('auth:sanctum')->put('/users/changeprof', [UserController::class, 'updateDescription']);
 Route::middleware('auth:sanctum')->post('users/update-picture', [UserController::class, 'updatePicture']);
 Route::apiResource('users', UserController::class);
+
+// ML Routes
+Route::post('/recommendations/{user_id}', [MLController::class, 'recommend']);
 
 // Data Routes
 Route::get('/pet-categories', [DataController::class, 'getPetCategories']);

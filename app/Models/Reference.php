@@ -24,10 +24,10 @@ class Reference extends Model
 
     public function animalType()
     {
-        return $this->belongsTo(PetCategory::class, 'animal_type', 'pet_category_id');
+        return $this->belongsTo(PetCategory::class, 'animal_type', 'id');
     }
 
-    public function breed()
+    public function Breed()
     {
         return $this->belongsTo(Breed::class, 'breed', 'id');
     }
