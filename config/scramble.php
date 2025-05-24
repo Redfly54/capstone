@@ -1,6 +1,7 @@
 <?php
 
 use Dedoc\Scramble\Http\Middleware\RestrictedDocsAccess;
+use Dedoc\Scramble\Http\Middleware\MyRestrictedDocsAccess;
 
 return [
     /*
@@ -104,7 +105,7 @@ return [
 
     'middleware' => [
         'web',
-        \App\Http\Middleware\MyRestrictedDocsAccess::class,
+        MyRestrictedDocsAccess::class,
     ],
 
     'extensions' => [],
