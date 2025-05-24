@@ -4,6 +4,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DataController;
+use App\Http\Controllers\MLController;
 
 Route::get('/images/{filename}', function ($filename) {
     $path = storage_path('app/public/images/' . $filename);
@@ -21,6 +22,9 @@ Route::middleware('auth:sanctum')->put('/users/changeprof', [UserController::cla
 Route::middleware('auth:sanctum')->post('users/update-picture', [UserController::class, 'updatePicture']);
 Route::apiResource('users', UserController::class);
 
+// ML Routes
+Route::post('/recommendations/{user_id}', [MLController::class, 'recommend']);
+
 // Data Routes
 Route::get('/pet-categories', [DataController::class, 'getPetCategories']);
 Route::post('/pet-categories', [DataController::class, 'addPetCategory']);
@@ -35,7 +39,7 @@ Route::get('/ages', [DataController::class, 'getAges']);
 // Posts Routes
 Route::post('posts/create', [PostController::class, 'store']);
 Route::get('/pets', [PostController::class, 'getAllPets']);
-Route::get('/pet/details', [PostController::class, 'getPetDetails']);
-Route::post('/pet/delete', [PostController::class, 'deletePet']);
+Route::get('/pet/details/{id}', [PostController::class, 'getPetDetails']);
+Route::post('/pet/delete/{id}', [PostController::class, 'deletePet']);
 Route::post('/pet/{id}', [PostController::class, 'updatePet']);
 

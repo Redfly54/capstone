@@ -23,10 +23,10 @@ class UserSeeder extends Seeder
             'is_admin' => true, 
         ]);
 
-        User::factory()
-        ->withReference()
-        ->count(10)
-        ->create();
+        // User::factory()
+        // ->withReference()
+        // ->count(10)
+        // ->create();
 
     }
 }
