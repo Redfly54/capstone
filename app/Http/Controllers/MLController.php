@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Result;
+use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Http;
@@ -45,5 +46,23 @@ class MLController extends Controller
     } else {
         return response()->json(['message' => 'ML API error', 'error' => $response->body()], 500);
     }
+    }
+
+    public function getResult($user_id)
+    {
+        $result = Result::where('user_id', $user_id)->first();
+
+        if (!$result) {
+            return response()->json(['message' => 'No result found for this user'], 404);
+        }
+
+        $postIds = collect($result->posts)->pluck('id')->all();
+
+        $posts = Post::whereIn('id', $postIds)->get();
+
+        return response()->json([
+            'message' => 'Result fetched successfully',
+            'result'  => $posts
+        ]);
     }
 }
