@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -151,4 +152,78 @@ class UserController extends Controller
         ]);
     }
 
+    public function getFavorites()
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+
+        $favorites = Favorite::where('user_id', $user->user_id)->first();
+
+        if (!$favorites || empty($favorites->posts)) {
+            return response()->json(['message' => 'No favorites found', 'favorites' => []], 200);
+        }
+
+        return response()->json(['favorites' => $favorites->posts], 200);
+    }
+
+    public function addFavorites(Request $request)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+
+        $validated = $request->validate([
+            'posts' => 'required|array',
+        ]);
+
+        $favorites = Favorite::where('user_id', $user->user_id)->first();
+
+        if (!$favorites) {
+
+            Favorite::create([
+                'user_id' => $user->user_id,
+                'posts' => $validated['posts'],
+            ]);
+        } else {
+            $currentPosts = $favorites->posts ?? [];
+            $alreadyFavorited = array_intersect($currentPosts, $validated['posts']);
+
+            if (!empty($alreadyFavorited)) {
+                return response()->json([
+                    'message' => 'The post is already favorited',
+                ]);
+            }
+            $updatedPosts = array_unique(array_merge($currentPosts, $validated['posts']));
+            $favorites->update(['posts' => $updatedPosts]);
+        }
+
+        return response()->json(['message' => 'Favorite Post successfully']);
+    }
+
+    public function removeFavorite($id)
+    {
+        $user = auth()->user();
+
+        if (!$user) {
+            return response()->json(['message' => 'User not authenticated'], 401);
+        }
+
+        $favorite = $user->favorite;
+        if (!$favorite) {
+            return response()->json(['message' => 'No favorites found'], 404);
+        }
+
+        $currentPosts = $favorite->posts ?? [];
+        // Remove the specified post ID
+        $updatedPosts = array_values(array_diff($currentPosts, [$id]));
+
+        $favorite->update(['posts' => $updatedPosts]);
+
+        return response()->json(['message' => 'Favorite removed successfully']);
+    }
 }

@@ -50,6 +50,12 @@ class User extends Authenticatable
     {
         return $this->hasOne(Result::class, 'user_id', 'user_id');
     }
+
+    public function favorite()
+    {
+        return $this->hasOne(Favorite::class, 'user_id', 'user_id');
+    }
+    
     /**
      * The attributes that should be hidden for serialization.
      *

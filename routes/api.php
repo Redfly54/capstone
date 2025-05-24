@@ -20,9 +20,13 @@ Route::post('users/login', [UserController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/users/profile', [UserController::class, 'profile']);
 Route::middleware('auth:sanctum')->put('/users/changeprof', [UserController::class, 'updateDescription']);
 Route::middleware('auth:sanctum')->post('users/update-picture', [UserController::class, 'updatePicture']);
+Route::middleware('auth:sanctum')->get('/users/favorites', [UserController::class, 'getFavorites']);
+Route::middleware('auth:sanctum')->post('/users/favorites', [UserController::class, 'addFavorites']);
+Route::middleware('auth:sanctum')->delete('/users/favorites/{id}', [UserController::class, 'removeFavorite']);
 Route::apiResource('users', UserController::class);
 
 // ML Routes
+Route::get('/results/{user_id}', [MLController::class, 'getResult']);
 Route::post('/recommendations/{user_id}', [MLController::class, 'recommend']);
 
 // Data Routes
