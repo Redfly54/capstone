@@ -24,7 +24,7 @@ class PostController extends Controller
             'gender'           => 'required|in:female,male',
             'about_pet'        => 'nullable|string',
             'pictures'         => 'nullable|array',
-            'pictures.*'       => 'image',
+            'pictures.*'       => 'image|max:3072|mimes:jpg,png,jpeg,gif,svg',
             'user_id'          => 'nullable|exists:users,user_id',
             'email'            => 'required|email',
             'phone'            => 'required|string',
