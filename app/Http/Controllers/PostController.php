@@ -231,7 +231,7 @@ class PostController extends Controller
             'pet_name'        => 'nullable|string|max:255',
             'pet_category_id' => 'nullable|exists:pet_categories,id',
             'breed_id'        => 'nullable|exists:breeds,id',
-            'color'           => 'nullable|string|max:100',
+            'color_count'     => 'nullable|string|max:100',
             'age_id'          => 'nullable|exists:ages,id',
             'weight'          => 'nullable|numeric',
             'gender'          => 'nullable|in:female,male',
@@ -271,8 +271,8 @@ class PostController extends Controller
                                 . '_' . ($idx+1) . '.' . $file->extension();
 
                 Log::info("Saving file: " . $filename);
-                $file->storeAs('', $filename, 'public');
-                $storedNames[] = $filename;
+                $file->storeAs('images', $filename, 'public');
+                $storedNames[] = 'images/' . $filename;
             }
                 Log::info("Pictures to save: ", $storedNames);
 
