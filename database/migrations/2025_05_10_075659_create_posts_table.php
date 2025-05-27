@@ -38,7 +38,7 @@ return new class extends Migration
             
             $table->decimal('weight', 8, 2);    // berat dalam kg, 2 desimal
             
-            $table->enum('gender', ['female', 'male']);
+            $table->enum('gender', ['Jantan', 'Betina']);
             
             $table->text('about_pet');         // deskripsi
             

@@ -58,7 +58,9 @@ class MLController extends Controller
 
         $postIds = collect($result->posts)->pluck('id')->all();
 
-        $posts = Post::whereIn('id', $postIds)->get();
+        $posts = Post::with(['breed', 'age', 'category'])
+                ->whereIn('id', $postIds)
+                ->get();
 
         return response()->json([
             'message' => 'Result fetched successfully',
